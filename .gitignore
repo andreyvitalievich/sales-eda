@@ -1,0 +1,31 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# PyCharm
+.idea/
+*.iml
+
+# Jupyter (якщо колись будеш використовувати)
+.ipynb_checkpoints/
+
+# Output files
+outputs/figures/*
+!outputs/figures/.gitkeep  # можна створити порожній .gitkeep, щоб Git бачив папку
+
+# Data (якщо хочеш, щоб CSV не потрапляли на GitHub)
+data/*.csv
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
