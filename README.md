@@ -1,100 +1,172 @@
-📊 Sales Data Analysis (EDA)
-This project is a simple and clean Exploratory Data Analysis (EDA) of sales data written in Python using PyCharm.
-It demonstrates key data analytics skills: data cleaning, transformation, aggregation, visualization, and extracting insights useful for business decisions.
+# 📊 Sales Data Analysis (EDA)
 
-🧱 Project Structure
-project/
-├─ data/
-│  ├─ sales.csv
+This project is a simple **Exploratory Data Analysis (EDA)** of sales data using Python.  
+It demonstrates key data analytics skills: data cleaning, transformation, aggregation, and visualization using `pandas` and `matplotlib`.  
+The project is structured to be professional and GitHub-ready for portfolio purposes.
+
+---
+
+## 🧱 Project Structure
+
+```
+Sales EDA/
+├─ data/                 # CSV files with raw sales data
 ├─ outputs/
-│  ├─ figures/
-│  │  ├─ sales_by_month.png
-├─ src/
+│  ├─ figures/           # Saved graphs
+├─ src/                  # Python scripts
 │  ├─ main.py
 │  ├─ data_cleaning.py
 │  ├─ analysis.py
 │  ├─ visualization.py
 ├─ README.md
 └─ requirements.txt
+```
 
-🎯 Project Objectives
-Load and explore the sales dataset
-Clean the data (missing values, invalid rows, negative quantities)
-Create new calculated fields (total, month)
-Analyze sales patterns
-Build visualizations using matplotlib
-Save charts to /outputs/figures/
-Summarize business insights
+---
 
-📥 Dataset Description
-The dataset (CSV file) contains sales transactions.
-Column	Description
+## 🎯 Project Objectives
 
-| Column      | Description               |
-| ----------- | ------------------------- |
-| order_id    | Unique order identifier   |
-| order_date  | Date of purchase          |
-| customer_id | Customer unique ID        |
-| product_id  | Product identifier        |
-| category    | Product category          |
-| price       | Price for one unit        |
-| quantity    | Number of units purchased |
-| country     | Customer’s country        |
+- Load and explore the sales dataset  
+- Clean the data (missing values, negative quantities)  
+- Create new calculated fields (`total`, `month`)  
+- Analyze sales patterns by month and product  
+- Build and save visualizations using `matplotlib`  
+- Summarize key business insights  
 
-🧹 Data Cleaning
-The script removes or fixes problematic data:
-✔ Remove rows with missing critical fields
+---
+
+## 📥 Dataset Description
+
+The dataset (CSV file) contains sales transactions:
+
+| Column       | Description                       |
+|--------------|-----------------------------------|
+| order_id     | Unique order identifier           |
+| order_date   | Date of purchase                  |
+| customer_id  | Customer unique ID                |
+| product_id   | Product identifier                |
+| category     | Product category                  |
+| price        | Price per unit                    |
+| quantity     | Number of units purchased         |
+| country      | Customer’s country                |
+
+---
+
+## 🧹 Data Cleaning
+
+The project cleans the data using the following steps:
+
+### 1. Remove rows with missing critical fields
+```python
 df = df.dropna(subset=['order_id', 'order_date', 'price'])
-✔ Fill missing categories
+```
+
+### 2. Fill missing categories
+```python
 df['category'] = df['category'].fillna('Unknown')
-✔ Remove rows where quantity is negative
+```
+
+### 3. Remove negative quantities
+```python
 df = df[df['quantity'] >= 0]
+```
 
-🧮 Feature Engineering
-Total transaction revenue
+### 4. Add calculated columns
+```python
 df['total'] = df['price'] * df['quantity']
-Extract monthly period
 df['month'] = df['order_date'].dt.to_period('M')
+```
 
-📊 Analysis & Visualizations
-Monthly sales revenue
-Aggregation:
+---
+
+## 🧮 Analysis
+
+### Aggregate sales by month
+```python
 sales_by_month = df.groupby('month')['total'].sum().reset_index()
-Plot:
-plt.plot(sales_by_month['month'].astype(str), sales_by_month['total'])
-Saved to:
-/outputs/figures/sales_by_month.png
-Top 10 products:
+```
+
+### Top 10 products by revenue
+```python
 top_products = df.groupby('product_id')['total'].sum().nlargest(10)
-Descriptive statistics:
+```
+
+### Descriptive statistics
+```python
 df.describe()
+```
 
-🧠 Key Insights
-(Example placeholder — replace with your real findings)
-Sales have seasonal spikes in specific months
-A small number of products generate a large portion of total revenue
-Some countries contribute significantly more to global sales
-Several data anomalies (missing values, negative quantities) were found and fixed
+---
 
-🛠 Technologies Used
-- Python
-- pandas
-- numpy
-- matplotlib
-- PyCharm
+## 📊 Visualization
 
-🚀 How to Run the Project
-Clone the repository:
-git clone https://github.com/andreyvitalievich/sales-eda.git
-Install required libraries:
+### Monthly sales plot
+```python
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+
+plt.figure(figsize=(10,5))
+plt.plot(sales_by_month['month'].astype(str), sales_by_month['total'])
+plt.xticks(rotation=45)
+plt.gca().yaxis.set_major_formatter(mticker.StrMethodFormatter('{x:,.0f}'))
+plt.title('Sales by Month')
+plt.xlabel('Month')
+plt.ylabel('Total Sales')
+plt.tight_layout()
+plt.savefig('outputs/figures/sales_by_month.png', dpi=300, bbox_inches='tight')
+plt.show()
+```
+
+> The chart will be saved in `outputs/figures/`.
+
+---
+
+## 🧠 Key Insights
+
+- Sales peak during certain months (e.g., holiday season)  
+- A few products generate the majority of revenue  
+- Some countries contribute more to total sales  
+- Negative and missing data were cleaned for accurate analysis  
+
+---
+
+## 🛠 Technologies Used
+
+- Python  
+- pandas  
+- numpy  
+- matplotlib  
+- PyCharm  
+
+---
+
+## 🚀 How to Run the Project
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/sales-eda.git
+```
+
+2. Install required libraries:
+```bash
 pip install -r requirements.txt
-Run the project in PyCharm (or any IDE) by executing:
-src/main.py
-Output charts will appear in:
-outputs/figures/
+```
 
-📬 Contact
-Author: Shyianovskyi Andrii
-Email: kabelua351@gmail.com
-GitHub: https://github.com/andreyvitalievich
-Telegram: +380 66 409 17 94
+3. Run the project in PyCharm:
+```bash
+python src/main.py
+```
+
+4. Output charts will appear in:
+```
+outputs/figures/
+```
+
+---
+
+## 📬 Contact
+
+Author: *Shyianovskyi Andrii*  
+Email: *kabelua351@gmail.com*  
+GitHub: *https://github.com/your-username](https://github.com/andreyvitalievich*  
+Telegram: *+380 66 409 17 94*
