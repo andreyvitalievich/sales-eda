@@ -59,23 +59,23 @@ The project cleans the data using the following steps:
 
 ### 1. Remove rows with missing critical fields
 ```python
-df = df.dropna(subset=['order_id', 'order_date', 'price'])
+df = df.dropna(subset=['Description'])
 ```
 
 ### 2. Fill missing categories
 ```python
-df['category'] = df['category'].fillna('Unknown')
+df['Description'] = df['Description'].fillna('Unknown')
 ```
 
 ### 3. Remove negative quantities
 ```python
-df = df[df['quantity'] >= 0]
+df = df[df['Quantity'] >= 0]
 ```
 
 ### 4. Add calculated columns
 ```python
-df['total'] = df['price'] * df['quantity']
-df['month'] = df['order_date'].dt.to_period('M')
+df['total'] = df['Quantity'] * df['UnitPrice']
+df['month'] = df['InvoiceDate'].dt.to_period('M')
 ```
 
 ---
