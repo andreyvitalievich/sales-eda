@@ -39,16 +39,17 @@ Sales EDA/
 
 The dataset (CSV file) contains sales transactions:
 
-| Column       | Description                       |
-|--------------|-----------------------------------|
-| order_id     | Unique order identifier           |
-| order_date   | Date of purchase                  |
-| customer_id  | Customer unique ID                |
-| product_id   | Product identifier                |
-| category     | Product category                  |
-| price        | Price per unit                    |
-| quantity     | Number of units purchased         |
-| country      | Customer’s country                |
+| Column      | Description               |
+| ----------- | ------------------------- |
+| InvoiceNo   | Unique order identifier   |
+| StockCode   | Product stock code        |
+| Description | Product description       |
+| Quantity    | Number of units purchased |
+| InvoiceDate | Date of purchase          |
+| UnitPrice   | Price per unit            |
+| CustomerID  | Customer unique ID        |
+| Country     | Customer’s country        |
+
 
 ---
 
